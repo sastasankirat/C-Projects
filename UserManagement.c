@@ -2,6 +2,8 @@
 #include <string.h>
 #include <conio.h>
 
+#define MAX_USERS 10
+
 void maskPassword(char *password) {
     char ch;
     int i = 0;
@@ -26,12 +28,10 @@ int main() {
     printf("2. Login\n");
     printf("3. Exit\n");
 
-    char name1[100] = "";
-    char password1[100] = "";
-    char name2[100];
-    char password2[100];
-    
+    char names[MAX_USERS][100];
+    char passwords[MAX_USERS][100];
     int registered = 0; 
+    int userCount = 0;
 
     while (1) {
         printf("Select an option: ");
@@ -39,12 +39,18 @@ int main() {
         scanf("%d", &x);
         
         switch (x) {
-            case 1: 
+            case 1:
+                if (userCount >= MAX_USERS) {
+                    printf("Maximum user limit reached!\n");
+                    break;
+                }
+
                 printf("Register a new user.\n");
                 printf("Enter Username: ");
-                scanf("%s", name1);
+                scanf("%s", names[userCount]);
                 printf("Enter Password: ");
-                maskPassword(password1);
+                maskPassword(passwords[userCount]);
+                userCount++;
                 registered = 1;
                 break;
 
@@ -54,14 +60,23 @@ int main() {
                     break;
                 }
 
+                char name2[100];
+                char password2[100];
                 printf("Enter Username: ");
                 scanf("%s", name2);
                 printf("Enter Password: ");
                 maskPassword(password2);
 
-                if (strcmp(name1, name2) == 0 && strcmp(password1, password2) == 0) {
-                    printf("Login Successful! Welcome %s\n", name1);
-                } else {
+                int loginSuccess = 0;
+                for (int i = 0; i < userCount; i++) {
+                    if (strcmp(names[i], name2) == 0 && strcmp(passwords[i], password2) == 0) {
+                        printf("Login Successful! Welcome %s\n", names[i]);
+                        loginSuccess = 1;
+                        break;
+                    }
+                }
+
+                if (!loginSuccess) {
                     printf("Login Failed! Incorrect Username or Password.\n");
                 }
                 break;

@@ -13,7 +13,11 @@ int main()
     while (1)
     {
         printf("Enter first number: ");
-        scanf("%f", &x);
+        while (scanf("%f", &x) != 1)
+        {
+            printf("Invalid input. Please enter a valid number: ");
+            while (getchar() != '\n');
+        }
 
         printf("Choose one of the following options: \n");
         printf("1. Add\n");
@@ -31,7 +35,7 @@ int main()
             if (scanf("%d", &choice) != 1)
             {
                 printf("Invalid choice. Please enter a number between 1 and 8.\n");
-                while(getchar() != '\n');
+                while (getchar() != '\n');
                 continue;
             }
 
@@ -39,28 +43,44 @@ int main()
             {
             case 1:
                 printf("Enter next number: ");
-                scanf("%f", &y);
+                while (scanf("%f", &y) != 1)
+                {
+                    printf("Invalid input. Please enter a valid number: ");
+                    while (getchar() != '\n');
+                }
                 x = x + y;
                 printf("Sum: %.2f\n", x);
                 break;
 
             case 2:
                 printf("Enter next number: ");
-                scanf("%f", &y);
+                while (scanf("%f", &y) != 1)
+                {
+                    printf("Invalid input. Please enter a valid number: ");
+                    while (getchar() != '\n');
+                }
                 x = x - y;
                 printf("Difference: %.2f\n", x);
                 break;
 
             case 3:
                 printf("Enter next number: ");
-                scanf("%f", &y);
+                while (scanf("%f", &y) != 1)
+                {
+                    printf("Invalid input. Please enter a valid number: ");
+                    while (getchar() != '\n');
+                }
                 x = x * y;
                 printf("Product: %.2f\n", x);
                 break;
 
             case 4:
                 printf("Enter next number: ");
-                scanf("%f", &y);
+                while (scanf("%f", &y) != 1)
+                {
+                    printf("Invalid input. Please enter a valid number: ");
+                    while (getchar() != '\n');
+                }
                 if (y == 0)
                 {
                     printf("Error: Division by zero is not allowed.\n");
@@ -74,7 +94,11 @@ int main()
 
             case 5:
                 printf("Enter next number (integer only): ");
-                scanf("%f", &y);
+                while (scanf("%f", &y) != 1)
+                {
+                    printf("Invalid input. Please enter a valid integer: ");
+                    while (getchar() != '\n');
+                }
                 if ((int)y != y)
                 {
                     printf("Error: Modulus only works with integers.\n");
@@ -93,14 +117,22 @@ int main()
 
             case 6:
                 printf("Enter next number: ");
-                scanf("%f", &y);
+                while (scanf("%f", &y) != 1)
+                {
+                    printf("Invalid input. Please enter a valid number: ");
+                    while (getchar() != '\n');
+                }
                 x = pow(x, y);
                 printf("Power result: %.2f\n", x);
                 break;
 
             case 7:
                 printf("Enter a new first number: ");
-                scanf("%f", &x);
+                while (scanf("%f", &x) != 1)
+                {
+                    printf("Invalid input. Please enter a valid number: ");
+                    while (getchar() != '\n');
+                }
                 printf("Current calculation reset. New first number set.\n");
                 break;
 
@@ -115,8 +147,7 @@ int main()
             char continue_choice;
             printf("Do you want to perform another operation on the current result? (y/n): ");
             while (getchar() != '\n');
-            scanf("%c", &continue_choice);
-            if (continue_choice != 'y' && continue_choice != 'Y')
+            if (scanf("%c", &continue_choice) != 1 || (continue_choice != 'y' && continue_choice != 'Y'))
             {
                 break;
             }
@@ -125,5 +156,3 @@ int main()
 
     return 0;
 }
-
-

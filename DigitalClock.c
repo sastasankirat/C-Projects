@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include <windows.h>
 
 void clear_screen() {
 #ifdef _WIN32
@@ -93,6 +94,13 @@ void countdown_timer() {
     clear_screen();
     printf("Countdown Timer: 00:00:00\n");
     printf("Time's up!\n");
+
+    #ifdef _WIN32
+    Beep(750, 500);
+    #else
+    printf("\a");
+    #endif
+
     sleep(3);
 }
 
